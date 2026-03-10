@@ -1,0 +1,93 @@
+import java.util.Scanner;
+import java.util.*;
+
+class Simple_Notepad {
+
+    static String notes[] = new String[50];
+    static int Abhange = 0;
+
+    static void addNote(Scanner sc) {
+
+        System.out.println("Enter note:");
+        String text = sc.nextLine();
+
+        notes[Abhange] = text;
+        Abhange++;
+
+        System.out.println("Note added.");
+    }
+
+    static void viewNotes() {
+
+        if (Abhange == 0) {
+            System.out.println("No notes available.");
+            return;
+        }
+
+        System.out.println("Your Notes:");
+
+        for (int i = 0; i < Abhange; i++) {
+            System.out.println((i + 1) + ". " + notes[i]);
+        }
+    }
+
+    static void deleteNote(Scanner sc) {
+
+        viewNotes();
+
+        if (Abhange == 0) {
+            return;
+        }
+
+        System.out.println("Enter note number to delete:");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        if (n > 0 && n <= Abhange) {
+
+            for (int i = n - 1; i < Abhange - 1; i++) {
+                notes[i] = notes[i + 1];
+            }
+
+            Abhange--;
+
+            System.out.println("Note deleted.");
+        } else {
+            System.out.println("Invalid number.");
+        }
+    }
+
+    public static void main(String args[]) {
+
+        System.out.println("Welcome to Latur simple notepad");
+        System.out.println("Author:Vaibhav Dnyaneshwar Abhange");
+
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+
+            System.out.println("\n----- SIMPLE NOTEPAD -----");
+            System.out.println("1. Add Note");
+            System.out.println("2. View Notes");
+            System.out.println("3. Delete Note");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter choice: ");
+            int Vaibhav = sc.nextInt();
+            sc.nextLine();
+
+            if (Vaibhav == 1) {
+                addNote(sc);
+            } else if (Vaibhav == 2) {
+                viewNotes();
+            } else if (Vaibhav == 3) {
+                deleteNote(sc);
+            } else if (Vaibhav == 4) {
+                System.out.println("Exiting Notepad...");
+                break;
+            } else {
+                System.out.println("Invalid choice.");
+            }
+        }
+    }
+}
